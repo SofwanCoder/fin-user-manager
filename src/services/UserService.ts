@@ -4,14 +4,12 @@ import { CreateUserPayload } from "../types/user";
 
 export default class UserService {
   public static async createNewUser(requestBody: CreateUserPayload) {
-    const { email, password, gender, first_name, last_name, phone } =
+    const { email, password, first_name, last_name } =
       requestBody;
 
     const newUser: IUserCreationAttributes = {
       first_name,
       last_name,
-      phone,
-      gender,
       email,
       password,
     };

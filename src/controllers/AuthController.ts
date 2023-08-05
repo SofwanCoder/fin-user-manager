@@ -3,16 +3,16 @@ import {
   CreateTokenPayload,
   RefreshTokenPayload,
 } from "../types/authorization";
-import { success } from "../utils/response";
+import {created, success} from "../utils/response";
 import AuthService from "../services/AuthService";
 
-@Route("/auths")
+@Route("/auth")
 @Tags("Auth")
 export default class AuthController {
   @SuccessResponse("201", "Bad Request")
   @Post("/tokens")
   public static async createTokenController(@Body() body: CreateTokenPayload) {
-    return success(await AuthService.createToken(body));
+    return created(await AuthService.createToken(body));
   }
 
   @SuccessResponse("201", "Bad Request")
@@ -20,6 +20,6 @@ export default class AuthController {
   public static async refreshTokenController(
     @Body() body: RefreshTokenPayload
   ) {
-    return success(await AuthService.refreshToken(body.refresh_token));
+    return success(await AuthService.refreshToken(body));
   }
 }

@@ -40,6 +40,16 @@ export function success<D>(data: D, message = "completed") {
     ok: true,
     data,
     message,
+    code: StatusCodes.OK
+  };
+}
+
+export function created<D>(data: D, message = "completed") {
+  return {
+    ok: true,
+    data,
+    message,
+    code: StatusCodes.CREATED
   };
 }
 

@@ -14,7 +14,7 @@ class UserHandler {
       const response = await UserController.createUserController(
         req.body as CreateUserPayload
       );
-      respond(res, response);
+      respond(res, response );
     } catch (error) {
       next(error);
     }

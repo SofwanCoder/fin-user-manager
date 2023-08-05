@@ -17,7 +17,7 @@
     "test": "jest ",
     "lint": "eslint -c .eslintrc.js",
     "doc": "tsoa spec",
-    "heroku-postbuild": "yarn build && yarn knex migrate:latest"
+    "migrate": "yarn knex migrate:latest"
   },
   "types": "src/index.ts",
   "jest": {

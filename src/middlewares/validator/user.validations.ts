@@ -19,14 +19,8 @@ export function createUserRules() {
 
         return true;
       }),
-    body("dob").isDate(),
     body("first_name").isString(),
     body("last_name").isString(),
-    body("country").isString(),
-    body("address").isString(),
-    body("state").isString(),
-    body("phone_number").isString(),
-    body("gender").isIn(["Male", "Female"]),
     body("password").isString().isLength({ min: 6 }),
     body("password_confirm")
       .isString()

@@ -42,15 +42,6 @@ export class User extends Model<IUserAttributes, IUserCreationAttributes> {
   public last_name!: string;
 
   @Column
-  public phone!: string;
-
-  @Column
-  public gender!: Gender;
-
-  @Column
-  public avatar!: string;
-
-  @Column
   public email!: string;
 
   @Column(DataType.STRING)
@@ -75,9 +66,6 @@ export class User extends Model<IUserAttributes, IUserCreationAttributes> {
       id,
       first_name,
       last_name,
-      phone,
-      gender,
-      avatar,
       email,
       password,
       created_at,
@@ -87,9 +75,6 @@ export class User extends Model<IUserAttributes, IUserCreationAttributes> {
       id,
       first_name,
       last_name,
-      phone,
-      gender,
-      avatar,
       email,
       password,
       created_at,

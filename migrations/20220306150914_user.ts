@@ -5,8 +5,6 @@ export async function up(knex: Knex): Promise<void> {
     table.increments("id");
     table.string("first_name").notNullable();
     table.string("last_name").notNullable();
-    table.string("phone", 20).notNullable();
-    table.string("avatar").nullable();
     table.string("email", 100).notNullable().unique();
     table.string("password", 100).notNullable();
     table.datetime("created_at").defaultTo(knex.fn.now());

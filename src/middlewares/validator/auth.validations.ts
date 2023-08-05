@@ -1,26 +1,21 @@
 import { body } from "express-validator";
+import { User } from "../../models/User";
 
-export function loginUserRules() {
-  return [body("email").isString().isEmail(), body("password").isString()];
-}
-
-export function refreshTokenRules() {
-  return [body("refresh_token").isString()];
-}
-
-export function resetRules() {
-  return [body("email").isString().isEmail().trim()];
-}
-
-export function secretRules() {
-  return [body("ref").isString(), body("code").isString().isNumeric()];
-}
-
-export function passwordRules() {
+export function createTokenRules() {
   return [
-    body("password").isString().isLength({
-      min: 6,
-    }),
-    body("token").isString(),
+    body("grant_type").isString().isIn(["password", "refresh_token"]).default("password"),
+    body("refresh_token")
+      .if(body("grant_type").equals("refresh_token"))
+      .isString(),
+    // if grant_type is password
+    body("email")
+      .if(body("grant_type").equals("password"))
+      .isString()
+      .trim()
+      .isEmail()
+      .toLowerCase(),
+    body("password")
+      .if(body("grant_type").equals("password"))
+      .isString().isLength({ min: 6 }),
   ];
 }

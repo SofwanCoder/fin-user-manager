@@ -47,10 +47,7 @@
           "url": "{protocol}://{host}:{port}{basePath}",
           "variables": {
             "port": {
-              "default": "5005",
-              "enum": [
-                "5005"
-              ]
+              "default": "7004"
             },
             "host": {
               "default": "localhost",

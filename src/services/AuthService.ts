@@ -3,7 +3,7 @@ import { User } from "../models/User";
 import ConflictException from "../exceptions/http/ConflictException";
 import NotFoundException from "../exceptions/http/NotFoundException";
 import { generateAuthorization } from "../helpers/auth.helper";
-import { CreateTokenPayload } from "../types/authorization";
+import {CreateTokenPayload, RefreshTokenPayload} from "../types/authorization";
 import Session from "../models/Session";
 import { verifyToken } from "../helpers/token.helper";
 import config from "../config";
@@ -11,6 +11,12 @@ import { RefreshedUser } from "../types/authorization";
 
 export default class AuthService {
   public static async createToken(requestBody: CreateTokenPayload) {
+
+    if (requestBody.grant_type === "refresh_token") {
+      return this.refreshToken(requestBody as RefreshTokenPayload)
+    }
+
+
     const { email, password } = requestBody;
 
     const where: Partial<User> = {
@@ -40,10 +46,10 @@ export default class AuthService {
     };
   }
 
-  public static async refreshToken(token: string) {
+  public static async refreshToken(token: RefreshTokenPayload) {
     const session = await Session.findOne({
       where: {
-        refresh_token: token,
+        refresh_token: token.refresh_token,
       },
     });
 
@@ -51,7 +57,7 @@ export default class AuthService {
       throw new NotFoundException("Session not found");
     }
 
-    verifyToken<RefreshedUser>(config.jwt.key, token);
+    verifyToken<RefreshedUser>(config.jwt.key, token.refresh_token);
 
     const user = await session.getUser();
 

@@ -7,13 +7,13 @@ services:
     #    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: database
+      MYSQL_DATABASE: fin-user-manager
       MYSQL_USER: u-wg04z
       MYSQL_PASSWORD: wg04zC
     volumes:
-      - mysql_project:/var/lib/mysql
+      - fin:/var/lib/mysql
     ports:
       - "3306:3306"
 
 volumes:
-  mysql_project:
+  fin-user-manager:
