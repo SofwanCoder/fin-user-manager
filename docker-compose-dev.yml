@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  mysql_project:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    #    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: database
+      MYSQL_USER: u-wg04z
+      MYSQL_PASSWORD: wg04zC
+    volumes:
+      - mysql_project:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+volumes:
+  mysql_project:
